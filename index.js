@@ -108,7 +108,6 @@
   //. > Z.toString(Unit)
   //. 'Unit'
   //. ```
-  Unit.inspect =
   Unit.toString = function toString() {
     return 'Unit';
   };
@@ -289,7 +288,6 @@
   //. > Z.toString(Pair(1, 2))
   //. 'Pair(1, 2)'
   //. ```
-  Pair.prototype.inspect =
   Pair.prototype.toString = function toString() {
     return 'Pair(' + Z.toString(this.a) + ', ' + Z.toString(this.b) + ')';
   };
@@ -439,7 +437,6 @@
   //. > Z.toString(Identity([1, 2, 3]))
   //. 'Identity([1, 2, 3])'
   //. ```
-  Identity.prototype.inspect =
   Identity.prototype.toString = function() {
     return 'Identity(' + Z.toString(this.b) + ')';
   };
