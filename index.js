@@ -50,8 +50,7 @@
   //. > Unit
   //. Unit
   //. ```
-  var Unit = {};
-  Unit.constructor = Object.create(Unit.constructor);
+  var Unit = {constructor: {}};
 
   //# Unit.@@type :: String
   //.
