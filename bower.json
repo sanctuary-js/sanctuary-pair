@@ -1,0 +1,37 @@
+{
+  "name": "sanctuary-tuples",
+  "description": "Fantasy Land -compliant tuple types",
+  "license": "MIT",
+  "repository": {
+    "type": "git",
+    "url": "git://github.com/sanctuary-js/sanctuary-tuples.git"
+  },
+  "main": "index.js",
+  "moduleType": [
+    "amd",
+    "globals",
+    "node"
+  ],
+  "keywords": [
+    "adt",
+    "functional",
+    "tuples",
+    "types"
+  ],
+  "dependencies": {
+    "sanctuary-type-classes": "6.0.x"
+  },
+  "ignore": [
+    "/.git/",
+    "/bower_components/",
+    "/coverage/",
+    "/node_modules/",
+    "/scripts/",
+    "/test/",
+    "/.*",
+    "/CONTRIBUTING.md",
+    "/Makefile",
+    "/circle.yml",
+    "/package.json"
+  ]
+}
