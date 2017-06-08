@@ -161,6 +161,7 @@
   //. true
   //.
   //. > Z.equals(Pair([1, 2, 3], [3, 2, 1]), Pair([1, 2, 3], [1, 2, 3]))
+  //. false
   //. ```
   Pair.prototype['fantasy-land/equals'] = function equals(other) {
     return Z.equals(this.a, other.a) && Z.equals(this.b, other.b);
