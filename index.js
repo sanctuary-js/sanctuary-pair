@@ -250,24 +250,6 @@
     }, f(pair.b));
   };
 
-  //# fst :: Pair a b -> a
-  //.
-  //. ```javascript
-  //. > fst(Pair('hello', 42))
-  //. 'hello'
-  //. ```
-  function fst(p) {
-    return p.a;
-  }
-
-  //# snd :: Pair a b -> b
-  //.
-  //. ```javascript
-  //. > snd(Pair('hello', 42))
-  //. 42
-  //. ```
-  var snd = Z.extract;
-
   //# Pair#fantasy-land/extend :: Pair a b ~> (Pair a b -> c) -> Pair a c
   //.
   //. ```javascript
@@ -297,6 +279,24 @@
   Pair.prototype.toString = function toString() {
     return 'Pair(' + Z.toString(this.a) + ', ' + Z.toString(this.b) + ')';
   };
+
+  //# fst :: Pair a b -> a
+  //.
+  //. ```javascript
+  //. > fst(Pair('hello', 42))
+  //. 'hello'
+  //. ```
+  function fst(p) {
+    return p.a;
+  }
+
+  //# snd :: Pair a b -> b
+  //.
+  //. ```javascript
+  //. > snd(Pair('the answer is', 42))
+  //. 42
+  //. ```
+  var snd = Z.extract;
 
   //. Identity (1-tuple) is the simplest container type: a value of type
   //. `Identity a` always contains exactly one value, of type `a`.
