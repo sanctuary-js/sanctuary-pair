@@ -66,10 +66,13 @@
   //. > Z.equals(Unit, Unit)
   //. true
   //.
-  //. > Z.equals(Unit, new Unit.constructor)
+  //. > Z.equals(Unit, Object.assign({}, Unit))
   //. false
   //.
-  //. > var u = new Unit.constructor; Z.equals(u, u)
+  //. > var u = Object.assign({}, Unit)
+  //. undefined
+  //.
+  //. > Z.equals(u, u)
   //. false
   //. ```
 
@@ -84,10 +87,13 @@
   //. > Z.lte(Unit, Unit)
   //. true
   //.
-  //. > Z.lte(Unit, new Unit.constructor)
+  //. > Z.lte(Unit, Object.assign({}, Unit))
   //. false
   //.
-  //. > var u = new Unit.constructor; Z.lte(u, u)
+  //. > var u = Object.assign({}, Unit);
+  //. undefined
+  //.
+  //. > Z.lte(u, u)
   //. false
   //. ```
   Unit['fantasy-land/lte'] = Unit['fantasy-land/equals'];
