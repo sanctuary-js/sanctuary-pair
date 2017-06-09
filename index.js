@@ -55,7 +55,7 @@
   //# Unit.@@type :: String
   //.
   //. ```javascript
-  //. > Unit['@@type']
+  //. > Unit.constructor['@@type']
   //. 'sanctuary-tuples/Unit'
   //. ```
   Unit.constructor['@@type'] = 'sanctuary-tuples/Unit';
@@ -150,7 +150,7 @@
   //.
   //. ```javascript
   //. > Pair['@@type']
-  //. 'santuary-tuples/Pair'
+  //. 'sanctuary-tuples/Pair'
   //. ```
   Pair['@@type'] = 'sanctuary-tuples/Pair';
 
@@ -334,7 +334,7 @@
   //.
   //. ```javascript
   //. > Identity['@@type']
-  //. 'sanctuary-either/Identity'
+  //. 'sanctuary-tuples/Identity'
   //. ```
   Identity['@@type'] = 'sanctuary-tuples/Identity';
 
