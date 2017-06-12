@@ -465,7 +465,7 @@
 //. [Functor]:          v:fantasyland/fantasy-land#functor
 //. [Monad]:            v:fantasyland/fantasy-land#monad
 //. [Ord]:              v:fantasyland/fantasy-land#ord
-//. [Semigroupoid]:     v:fantasyland/fantasy-land#semigroupoid
 //. [Semigroup]:        v:fantasyland/fantasy-land#semigroup
+//. [Semigroupoid]:     v:fantasyland/fantasy-land#semigroupoid
 //. [Setoid]:           v:fantasyland/fantasy-land#setoid
 //. [Traversable]:      v:fantasyland/fantasy-land#traversable
