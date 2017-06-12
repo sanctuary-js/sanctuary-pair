@@ -17,6 +17,22 @@
 //.
 //. <img alt="Fantasy Land" src="https://raw.githubusercontent.com/fantasyland/fantasy-land/master/logo.png" width="200" height="200" align="right">
 //.
+//. Pair (2-tuple) is the canonical product type: a value of type `Pair a b`
+//. always contains exactly two values, one of type `a`, the other `b`.
+//.
+//. `Pair a b` satisfies the following [Fantasy Land][] specifications:
+//.
+//.   - [Setoid][] (if `a` and `b` satisfy Setoid)
+//.   - [Ord][] (if `a` and `b` satisfy Ord)
+//.   - [Semigroupoid][]
+//.   - [Semigroup][] (if `a` and `b` satisfy Semigroup)
+//.   - [Functor][]
+//.   - [Apply][] (if `a` satisfies Semigroup)
+//.   - [Chain][] (if `a` satisfies Semigroup)
+//.   - [Foldable][]
+//.   - [Traversable][]
+//.   - [Extend][]
+//.   - [Extract][]
 
 (function(f) {
 
@@ -34,117 +50,6 @@
 }(function(Z) {
 
   'use strict';
-
-  //. The Unit (0-tuple) type has one value, Unit. It is the product of no
-  //. types and represents values with no computational content.
-  //.
-  //. `Unit` satisfies the following [Fantasy Land][] specifications:
-  //.
-  //.   - [Setoid][]
-  //.   - [Ord][]
-  //.   - [Semigroup][]
-  //.   - [Monoid][]
-
-  //# Unit :: Unit
-  //.
-  //. ```javascript
-  //. > Unit
-  //. Unit
-  //. ```
-  var Unit = {constructor: {}};
-
-  //# Unit.@@type :: String
-  //.
-  //. ```javascript
-  //. > Unit.constructor['@@type']
-  //. 'sanctuary-tuples/Unit'
-  //. ```
-  Unit.constructor['@@type'] = 'sanctuary-tuples/Unit';
-
-  //# Unit.constructor.empty :: () -> Unit
-  //.
-  //. ```javascript
-  //. > Z.empty(Unit.constructor)
-  //. Unit
-  //. ```
-  Unit.constructor['fantasy-land/empty'] = function empty() {
-    return Unit;
-  };
-
-  //# Unit.fantasy-land/equals :: Setoid a => Unit ~> a -> Boolean
-  //.
-  //. ```javascript
-  //. > Z.equals(Unit, Unit)
-  //. true
-  //.
-  //. > Z.equals(Unit, Object.assign({}, Unit))
-  //. false
-  //.
-  //. > var u = Object.assign({}, Unit)
-  //. undefined
-  //.
-  //. > Z.equals(u, u)
-  //. false
-  //. ```
-
-  // The last example may be going too far
-  Unit['fantasy-land/equals'] = function equals(other) {
-    return this === Unit && other === Unit;
-  };
-
-  //# Unit.fantasy-land/lte :: Ord a => Unit ~> a -> Boolean
-  //.
-  //. ```javascript
-  //. > Z.lte(Unit, Unit)
-  //. true
-  //.
-  //. > Z.lte(Unit, Object.assign({}, Unit))
-  //. false
-  //.
-  //. > var u = Object.assign({}, Unit);
-  //. undefined
-  //.
-  //. > Z.lte(u, u)
-  //. false
-  //. ```
-  Unit['fantasy-land/lte'] = Unit['fantasy-land/equals'];
-
-  //# Unit.fantasy-land/concat :: Semigroup a => Unit ~> a -> Unit
-  //.
-  //. ```javascript
-  //. > Z.concat(Unit, Unit)
-  //. Unit
-  //. ```
-  Unit['fantasy-land/concat'] = function concat(other) {
-    return Unit;
-  };
-
-  //# Unit.toString :: Unit ~> () -> String
-  //.
-  //. ```javascript
-  //. > Z.toString(Unit)
-  //. 'Unit'
-  //. ```
-  Unit.toString = function toString() {
-    return 'Unit';
-  };
-
-  //. Pair (2-tuple) is the canonical product type: a value of type `Pair a b`
-  //. always contains exactly two values, one of type `a`, the other `b`.
-  //.
-  //. `Pair a b` satisfies the following [Fantasy Land][] specifications:
-  //.
-  //.   - [Setoid][] (if `a` and `b` satisfy Setoid)
-  //.   - [Ord][] (if `a` and `b` satisfy Ord)
-  //.   - [Semigroupoid][]
-  //.   - [Semigroup][] (if `a` and `b` satisfy Semigroup)
-  //.   - [Functor][]
-  //.   - [Apply][] (if `a` satisfies Semigroup)
-  //.   - [Chain][] (if `a` satisfies Semigroup)
-  //.   - [Foldable][]
-  //.   - [Traversable][]
-  //.   - [Extend][]
-  //.   - [Extract][]
 
   //# Pair :: (a, b) -> Pair a b
   //.
@@ -342,7 +247,7 @@
   }
 
   return {
-    Unit: Unit, Pair: Pair, fst: fst, snd: snd, swap: swap
+    Pair: Pair, fst: fst, snd: snd, swap: swap
   };
 
 }));
@@ -354,7 +259,6 @@
 //. [Fantasy Land]:     v:fantasyland/fantasy-land
 //. [Foldable]:         v:fantasyland/fantasy-land#foldable
 //. [Functor]:          v:fantasyland/fantasy-land#functor
-//. [Monoid]:           v:fantasyland/fantasy-land#monoid
 //. [Ord]:              v:fantasyland/fantasy-land#ord
 //. [Semigroup]:        v:fantasyland/fantasy-land#semigroup
 //. [Semigroupoid]:     v:fantasyland/fantasy-land#semigroupoid

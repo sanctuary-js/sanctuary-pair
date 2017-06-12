@@ -5,7 +5,6 @@ var assert = require('assert');
 var Z = require('sanctuary-type-classes');
 
 var Tuples = require('..');
-var Unit = Tuples.Unit;
 var Pair = Tuples.Pair;
 var fst = Tuples.fst;
 var snd = Tuples.snd;
@@ -19,18 +18,12 @@ function eq(actual, expected) {
 }
 
 test('equals', function() {
-  eq(Z.equals(Unit, Unit), true);
-  eq(Z.equals(Unit, Object.create(Unit)), false);
-
   eq(Z.equals(Pair([1, 2, 3], [3, 2, 1]), Pair([1, 2, 3], [3, 2, 1])), true);
   eq(Z.equals(Z.equals(Pair([1, 2, 3], [3, 2, 1]),
                        Pair([1, 2, 3], [1, 2, 3]))), false);
 });
 
 test('lte', function() {
-  eq(Z.lte(Unit, Unit), true);
-  eq(Z.lte(Unit, Object.assign({}, Unit)), false);
-
   eq(Z.lte(Pair(0, 1), Pair(0, 1)), true);
   eq(Z.lte(Pair(0, 1), Pair(1, 1)), true);
   eq(Z.lte(Pair(1, 1), Pair(0, 1)), false);
@@ -41,14 +34,8 @@ test('compose', function() {
 });
 
 test('concat', function() {
-  eq(Z.concat(Unit, Unit), Unit);
-
   eq(Z.concat(Pair([1, 2, 3], [6, 5, 4]), Pair([4, 5, 6], [3, 2, 1])),
      Pair([1, 2, 3, 4, 5, 6], [6, 5, 4, 3, 2, 1]));
-});
-
-test('empty', function() {
-  eq(Z.empty(Unit.constructor), Unit);
 });
 
 test('map', function() {
