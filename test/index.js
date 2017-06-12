@@ -99,3 +99,14 @@ test('snd', function() {
 test('swap', function() {
   eq(swap(Pair(1, 2)), Pair(2, 1));
 });
+
+/* global Symbol */
+if (typeof Symbol === 'function' && typeof Symbol.iterator === 'symbol') {
+  test('Symbol.iterator', function() {
+    var p = Pair(1, 2);
+    var itr = p[Symbol.iterator]();
+    eq(itr.next().value, 1);
+    eq(itr.next().value, 2);
+    eq(itr.next().done, true);
+  });
+}

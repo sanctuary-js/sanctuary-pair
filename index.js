@@ -158,6 +158,20 @@
     this.b = b;
   }
 
+  /* global Symbol */
+  // istanbul ignore next: browser support
+  if (typeof Symbol === 'function' && typeof Symbol.iterator === 'symbol') {
+    //# Pair :: (a, b) -> Pair a b
+    //.
+    //. ```javascript
+    //. > [...Pair(1, 2)]
+    //. [1, 2]
+    //. ```
+    Pair.prototype[Symbol.iterator] = function values() {
+      return [this.a, this.b][Symbol.iterator]();
+    };
+  }
+
   //# Pair.@@type :: String
   //.
   //. ```javascript
