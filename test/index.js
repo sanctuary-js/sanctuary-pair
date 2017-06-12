@@ -9,6 +9,7 @@ var Unit = Tuples.Unit;
 var Pair = Tuples.Pair;
 var fst = Tuples.fst;
 var snd = Tuples.snd;
+var swap = Tuples.swap;
 
 //  eq :: (Any, Any) -> Undefined !
 function eq(actual, expected) {
@@ -93,4 +94,8 @@ test('fst', function() {
 
 test('snd', function() {
   eq(snd(Pair('hello', 42)), 42);
+});
+
+test('swap', function() {
+  eq(swap(Pair(1, 2)), Pair(2, 1));
 });

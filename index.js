@@ -317,8 +317,18 @@
   //. ```
   var snd = Z.extract;
 
+  //# swap :: Pair a b -> Pair b a
+  //.
+  //. ```javascript
+  //. > swap(Pair(1, 2))
+  //. Pair(2, 1)
+  //. ```
+  function swap(p) {
+    return Pair(p.b, p.a);
+  }
+
   return {
-    Unit: Unit, Pair: Pair, fst: fst, snd: snd
+    Unit: Unit, Pair: Pair, fst: fst, snd: snd, swap: swap
   };
 
 }));
