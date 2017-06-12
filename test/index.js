@@ -56,7 +56,7 @@ test('map', function() {
 });
 
 test('ap', function() {
-  eq(Z.ap(Pair(' there', Math.sqrt), Pair('hello', 64)),
+  eq(Z.ap(Pair('hello', Math.sqrt), Pair(' there', 64)),
      Pair('hello there', 8));
 });
 

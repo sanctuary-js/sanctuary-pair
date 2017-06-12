@@ -242,11 +242,11 @@
   //# Pair#fantasy-land/ap :: Semigroup a => Pair a b ~> Pair a (b -> c) -> Pair a c
   //.
   //. ```javascript
-  //. > Z.ap(Pair(' there', Math.sqrt), Pair('hello', 64))
+  //. > Z.ap(Pair('hello', Math.sqrt), Pair(' there', 64))
   //. Pair('hello there', 8)
   //. ```
   Pair.prototype['fantasy-land/ap'] = function ap(other) {
-    return Pair(Z.concat(this.a, other.a), other.b(this.b));
+    return Pair(Z.concat(other.a, this.a), other.b(this.b));
   };
 
   //# Pair#fantasy-land/chain :: Semigroup a => Pair a b ~> (b -> Pair a c) -> Pair a c
