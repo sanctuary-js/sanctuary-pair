@@ -84,6 +84,8 @@ test('chain', function() {
 
 test('alt', function() {
   eq(Z.alt(Identity([1, 2]), Identity([3, 4])), Identity([1, 2, 3, 4]));
+  eq(Z.chain(function(n) { return Pair([n], n + 1); },
+             Pair([1], 2)), Pair([1, 2], 3));
 });
 
 test('reduce', function() {

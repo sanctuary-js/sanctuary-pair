@@ -140,6 +140,7 @@
   //.   - [Semigroup][] (if `a` and `b` satisfy Semigroup)
   //.   - [Functor][]
   //.   - [Apply][]
+  //.   - [Chain][] (if `a` satisfies Semigroup)
   //.   - [Foldable][]
   //.   - [Traversable][]
   //.   - [Extend][]
@@ -237,6 +238,17 @@
   //. ```
   Pair.prototype['fantasy-land/ap'] = function ap(other) {
     return makePair(this, Z.concat(this.a, other.a), other.b(this.b));
+  };
+
+  //# Pair#fantasy-land/chain :: Semigroup a => Pair a b ~> (b -> Pair a c) -> Pair a c
+  //.
+  //. ```javascript
+  //. > Z.chain(n => Pair([n], n + 1), Pair([1], 2))
+  //. Pair([1, 2], 3)
+  //. ```
+  Pair.prototype['fantasy-land/chain'] = function ap(f) {
+    var result = f(this.b);
+    return Pair(Z.concat(this.a, result.a), result.b);
   };
 
   //# Pair#fantasy-land/reduce :: Pair a b ~> ((c, a) -> c, c) -> c
