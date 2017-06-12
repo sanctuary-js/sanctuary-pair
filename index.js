@@ -43,6 +43,7 @@
   //.   - [Setoid][]
   //.   - [Ord][]
   //.   - [Semigroup][]
+  //.   - [Monoid][]
 
   //# Unit :: Unit
   //.
@@ -59,6 +60,16 @@
   //. 'sanctuary-tuples/Unit'
   //. ```
   Unit.constructor['@@type'] = 'sanctuary-tuples/Unit';
+
+  //# Unit.constructor.empty :: () -> Unit
+  //.
+  //. ```javascript
+  //. > Z.empty(Unit.constructor)
+  //. Unit
+  //. ```
+  Unit.constructor['fantasy-land/empty'] = function empty() {
+    return Unit;
+  };
 
   //# Unit.fantasy-land/equals :: Setoid a => Unit ~> a -> Boolean
   //.
@@ -464,6 +475,7 @@
 //. [Foldable]:         v:fantasyland/fantasy-land#foldable
 //. [Functor]:          v:fantasyland/fantasy-land#functor
 //. [Monad]:            v:fantasyland/fantasy-land#monad
+//. [Monoid]:           v:fantasyland/fantasy-land#monoid
 //. [Ord]:              v:fantasyland/fantasy-land#ord
 //. [Semigroup]:        v:fantasyland/fantasy-land#semigroup
 //. [Semigroupoid]:     v:fantasyland/fantasy-land#semigroupoid

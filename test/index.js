@@ -61,6 +61,8 @@ test('concat', function() {
      Pair([1, 2, 3, 4, 5, 6], [6, 5, 4, 3, 2, 1]));
 
   eq(Z.concat(Identity([1, 2]), Identity([3, 4])), Identity([1, 2, 3, 4]));
+test('empty', function() {
+  eq(Z.empty(Unit.constructor), Unit);
 });
 
 test('map', function() {
