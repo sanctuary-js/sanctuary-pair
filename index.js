@@ -92,7 +92,7 @@
     return this === Unit && other === Unit;
   };
 
-  //# Unit.fantasy-land/lte :: Ord a => Unit ~> a
+  //# Unit.fantasy-land/lte :: Ord a => Unit ~> a -> Boolean
   //.
   //. ```javascript
   //. > Z.lte(Unit, Unit)
@@ -109,7 +109,7 @@
   //. ```
   Unit['fantasy-land/lte'] = Unit['fantasy-land/equals'];
 
-  //# Unit.fantasy-land/concat
+  //# Unit.fantasy-land/concat :: Semigroup a => Unit ~> a -> Unit
   //.
   //. ```javascript
   //. > Z.concat(Unit, Unit)
@@ -139,7 +139,7 @@
   //.   - [Semigroupoid][]
   //.   - [Semigroup][] (if `a` and `b` satisfy Semigroup)
   //.   - [Functor][]
-  //.   - [Apply][]
+  //.   - [Apply][] (if `a` satisfies Semigroup)
   //.   - [Chain][] (if `a` satisfies Semigroup)
   //.   - [Foldable][]
   //.   - [Traversable][]

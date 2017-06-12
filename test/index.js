@@ -17,13 +17,6 @@ function eq(actual, expected) {
   assert.strictEqual(Z.equals(actual, expected), true);
 }
 
-//  compose :: (b -> c, a -> b) -> a -> c
-function compose(f, g) {
-  return function(x) {
-    return f(g(x));
-  };
-}
-
 test('equals', function() {
   eq(Z.equals(Unit, Unit), true);
   eq(Z.equals(Unit, Object.create(Unit)), false);
@@ -35,7 +28,7 @@ test('equals', function() {
 
 test('lte', function() {
   eq(Z.lte(Unit, Unit), true);
-  eq(Z.lte(Unit, Object.create(Unit)), false);
+  eq(Z.lte(Unit, Object.assign({}, Unit)), false);
 
   eq(Z.lte(Pair(0, 1), Pair(0, 1)), true);
   eq(Z.lte(Pair(0, 1), Pair(1, 1)), true);
