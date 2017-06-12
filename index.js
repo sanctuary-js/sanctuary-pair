@@ -152,10 +152,10 @@
   //. > Pair(1, 2)
   //. Pair(1, 2)
   //. ```
-  function Pair(a, b) {
-    if (!(this instanceof Pair)) return new Pair(a, b);
-    this.a = a;
-    this.b = b;
+  function Pair(fst, snd) {
+    if (!(this instanceof Pair)) return new Pair(fst, snd);
+    this.fst = fst;
+    this.snd = snd;
   }
 
   /* global Symbol */
@@ -168,7 +168,7 @@
     //. [1, 2]
     //. ```
     Pair.prototype[Symbol.iterator] = function values() {
-      return [this.a, this.b][Symbol.iterator]();
+      return [this.fst, this.snd][Symbol.iterator]();
     };
   }
 
@@ -190,7 +190,7 @@
   //. false
   //. ```
   Pair.prototype['fantasy-land/equals'] = function equals(other) {
-    return Z.equals(this.a, other.a) && Z.equals(this.b, other.b);
+    return Z.equals(this.fst, other.fst) && Z.equals(this.snd, other.snd);
   };
 
   //# Pair#fantasy-land/lte :: (Ord a, Ord b) => Pair a b ~> Pair a b -> Boolean
@@ -206,7 +206,7 @@
   //. false
   //. ```
   Pair.prototype['fantasy-land/lte'] = function lte(other) {
-    return Z.lte(this.a, other.a) && Z.lte(this.b, other.b);
+    return Z.lte(this.fst, other.fst) && Z.lte(this.snd, other.snd);
   };
 
   //# Pair#fantasy-land/compose :: Pair a b ~> Pair b c -> Pair a c
@@ -216,7 +216,7 @@
   //. Pair(1, true)
   //. ```
   Pair.prototype['fantasy-land/compose'] = function compose(other) {
-    return Pair(this.a, other.b);
+    return Pair(this.fst, other.snd);
   };
 
   //# Pair#fantasy-land/concat :: (Semigroup a, Semigroup b) => Pair a b ~> Pair a b -> Pair a b
@@ -226,7 +226,7 @@
   //. Pair([1, 2, 3, 4, 5, 6], [6, 5, 4, 3, 2, 1])
   //. ```
   Pair.prototype['fantasy-land/concat'] = function concat(other) {
-    return Pair(Z.concat(this.a, other.a), Z.concat(this.b, other.b));
+    return Pair(Z.concat(this.fst, other.fst), Z.concat(this.snd, other.snd));
   };
 
   //# Pair#fantasy-land/map :: Pair a b ~> (b -> c) -> Pair a c
@@ -236,7 +236,7 @@
   //. Pair('hello', 8)
   //. ```
   Pair.prototype['fantasy-land/map'] = function map(f) {
-    return Pair(this.a, f(this.b));
+    return Pair(this.fst, f(this.snd));
   };
 
   //# Pair#fantasy-land/ap :: Semigroup a => Pair a b ~> Pair a (b -> c) -> Pair a c
@@ -246,7 +246,7 @@
   //. Pair('hello there', 8)
   //. ```
   Pair.prototype['fantasy-land/ap'] = function ap(other) {
-    return Pair(Z.concat(other.a, this.a), other.b(this.b));
+    return Pair(Z.concat(other.fst, this.fst), other.snd(this.snd));
   };
 
   //# Pair#fantasy-land/chain :: Semigroup a => Pair a b ~> (b -> Pair a c) -> Pair a c
@@ -256,8 +256,8 @@
   //. Pair([1, 2], 3)
   //. ```
   Pair.prototype['fantasy-land/chain'] = function ap(f) {
-    var result = f(this.b);
-    return Pair(Z.concat(this.a, result.a), result.b);
+    var result = f(this.snd);
+    return Pair(Z.concat(this.fst, result.fst), result.snd);
   };
 
   //# Pair#fantasy-land/reduce :: Pair a b ~> ((c, a) -> c, c) -> c
@@ -267,7 +267,7 @@
   //. [1, 2, 3, 4, 5, 6]
   //. ```
   Pair.prototype['fantasy-land/reduce'] = function reduce(f, x) {
-    return f(x, this.b);
+    return f(x, this.snd);
   };
 
   //# Pair#fantasy-land/traverse :: Applicative f => Pair a b ~> (TypeRep f, b -> f c) -> f (Pair a c)
@@ -279,8 +279,8 @@
   Pair.prototype['fantasy-land/traverse'] = function traverse(typeRep, f) {
     var pair = this;
     return Z.map(function(x) {
-      return Pair(pair.a, x);
-    }, f(pair.b));
+      return Pair(pair.fst, x);
+    }, f(pair.snd));
   };
 
   //# Pair#fantasy-land/extend :: Pair a b ~> (Pair a b -> c) -> Pair a c
@@ -290,7 +290,7 @@
   //. Pair('forever', 100)
   //. ```
   Pair.prototype['fantasy-land/extend'] = function extend(f) {
-    return Pair(this.a, f(this));
+    return Pair(this.fst, f(this));
   };
 
   //# Pair#fantasy-land/extract :: Pair a b ~> () -> b
@@ -300,7 +300,7 @@
   //. 42
   //. ```
   Pair.prototype['fantasy-land/extract'] = function extract() {
-    return this.b;
+    return this.snd;
   };
 
   //# Pair#toString :: Pair a b ~> () -> String
@@ -310,7 +310,7 @@
   //. 'Pair(1, 2)'
   //. ```
   Pair.prototype.toString = function toString() {
-    return 'Pair(' + Z.toString(this.a) + ', ' + Z.toString(this.b) + ')';
+    return 'Pair(' + Z.toString(this.fst) + ', ' + Z.toString(this.snd) + ')';
   };
 
   //# fst :: Pair a b -> a
@@ -320,7 +320,7 @@
   //. 'hello'
   //. ```
   function fst(p) {
-    return p.a;
+    return p.fst;
   }
 
   //# snd :: Pair a b -> b
@@ -338,7 +338,7 @@
   //. Pair(2, 1)
   //. ```
   function swap(p) {
-    return Pair(p.b, p.a);
+    return Pair(p.snd, p.fst);
   }
 
   return {
