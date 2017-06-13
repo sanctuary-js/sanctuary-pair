@@ -13,7 +13,7 @@
           \      \  /
            \______\/                */
 
-//. # sanctuary-tuples
+//. # sanctuary-pair
 //.
 //. <img alt="Fantasy Land" src="https://raw.githubusercontent.com/fantasyland/fantasy-land/master/logo.png" width="200" height="200" align="right">
 //.
@@ -44,7 +44,7 @@
   } else if (typeof define === 'function' && define.amd != null) {
     define(['sanctuary-type-classes'], f);
   } else {
-    self.sanctuaryTuples = f(self.sanctuaryTypeClasses);
+    self.sanctuaryPair = f(self.sanctuaryTypeClasses);
   }
 
 }(function(Z) {
@@ -81,9 +81,9 @@
   //.
   //. ```javascript
   //. > Pair['@@type']
-  //. 'sanctuary-tuples/Pair'
+  //. 'sanctuary-pair/Pair'
   //. ```
-  Pair['@@type'] = 'sanctuary-tuples/Pair';
+  Pair['@@type'] = 'sanctuary-pair/Pair';
 
   //# Pair#fantasy-land/equals :: (Setoid a, Setoid b) => Pair a b ~> Pair a b -> Boolean
   //.

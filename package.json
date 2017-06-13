@@ -1,11 +1,11 @@
 {
-  "name": "sanctuary-tuples",
+  "name": "sanctuary-pair",
   "version": "0.0.0",
-  "description": "Fantasy Land -compliant tuple types",
+  "description": "Fantasy Land -compliant Pair type",
   "license": "MIT",
   "repository": {
     "type": "git",
-    "url": "git://github.com/sanctuary-js/sanctuary-tuple.git"
+    "url": "git://github.com/sanctuary-js/sanctuary-pair.git"
   },
   "scripts": {
     "test": "make lint test"

@@ -4,11 +4,11 @@ var assert = require('assert');
 
 var Z = require('sanctuary-type-classes');
 
-var Tuples = require('..');
-var Pair = Tuples.Pair;
-var fst = Tuples.fst;
-var snd = Tuples.snd;
-var swap = Tuples.swap;
+var P = require('..');
+var Pair = P.Pair;
+var fst = P.fst;
+var snd = P.snd;
+var swap = P.swap;
 
 //  eq :: (Any, Any) -> Undefined !
 function eq(actual, expected) {

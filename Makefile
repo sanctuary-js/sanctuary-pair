@@ -5,7 +5,7 @@ NPM = npm
 REMARK = node_modules/.bin/remark --frail --no-stdout
 REMEMBER_BOWER = node_modules/.bin/remember-bower
 TRANSCRIBE = node_modules/.bin/transcribe
-XYZ = node_modules/.bin/xyz --repo git@github.com:sanctuary-js/sanctuary-tuples.git --script scripts/prepublish
+XYZ = node_modules/.bin/xyz --repo git@github.com:sanctuary-js/sanctuary-pair.git --script scripts/prepublish
 
 
 .PHONY: all
@@ -24,7 +24,7 @@ README.md: README.md.tmp package.json scripts/version-urls
 README.md.tmp: index.js
 	$(TRANSCRIBE) \
 	  --heading-level 4 \
-	  --url 'https://github.com/sanctuary-js/sanctuary-tuples/blob/v$(VERSION)/{filename}#L{line}' \
+	  --url 'https://github.com/sanctuary-js/sanctuary-pair/blob/v$(VERSION)/{filename}#L{line}' \
 	  -- $^ \
 	| LC_ALL=C sed 's/<h4 name="\(.*\)#\(.*\)">\(.*\)\1#\2/<h4 name="\1.prototype.\2">\3\1#\2/' >'$@'
 
