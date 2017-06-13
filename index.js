@@ -66,7 +66,7 @@
   /* global Symbol */
   // istanbul ignore next: browser support
   if (typeof Symbol === 'function' && typeof Symbol.iterator === 'symbol') {
-    //# Pair :: (a, b) -> Pair a b
+    //# Pair#[Symbol.iterator] :: Pair a b ~> () -> Iterator a b
     //.
     //. ```javascript
     //. > [...Pair(1, 2)]
