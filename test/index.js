@@ -42,6 +42,11 @@ test('map', function() {
   eq(Z.map(Math.sqrt, Pair('hello', 64)), Pair('hello', 8));
 });
 
+test('bimap', function() {
+  eq(Z.bimap(function(x) { return x + ' there'; }, Math.sqrt,
+             Pair('hello', 64)), Pair('hello there', 8));
+});
+
 test('ap', function() {
   eq(Z.ap(Pair('hello', Math.sqrt), Pair(' there', 64)),
      Pair('hello there', 8));

@@ -27,6 +27,7 @@
 //.   - [Semigroupoid][]
 //.   - [Semigroup][] (if `a` and `b` satisfy Semigroup)
 //.   - [Functor][]
+//.   - [Bifunctor][]
 //.   - [Apply][] (if `a` satisfies Semigroup)
 //.   - [Chain][] (if `a` satisfies Semigroup)
 //.   - [Foldable][]
@@ -144,6 +145,16 @@
     return Pair(this.fst, f(this.snd));
   };
 
+  //# Pair#fantasy-land/bimap :: Pair a b ~> (a -> b) -> (c -> d) -> Pair b d
+  //.
+  //. ```javascript
+  //. > Z.bimap(s => s + ' there', Math.sqrt, Pair('hello', 64))
+  //. Pair('hello there', 8)
+  //. ```
+  Pair.prototype['fantasy-land/bimap'] = function bimap(f, g) {
+    return Pair(f(this.fst), g(this.snd));
+  };
+
   //# Pair#fantasy-land/ap :: Semigroup a => Pair a b ~> Pair a (b -> c) -> Pair a c
   //.
   //. ```javascript
@@ -253,6 +264,7 @@
 }));
 
 //. [Apply]:            v:fantasyland/fantasy-land#apply
+//. [Bifunctor]:        v:fantasyland/fantasy-land#bifunctor
 //. [Chain]:            v:fantasyland/fantasy-land#chain
 //. [Extend]:           v:fantasyland/fantasy-land#extend
 //. [Extract]:          v:fantasyland/fantasy-land#extract
