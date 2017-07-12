@@ -57,7 +57,6 @@ lint:
 	  --use remark-lint-no-undefined-references \
 	  --use remark-lint-no-unused-definitions \
 	  -- README.md
-	git checkout README.md
 
 
 .PHONY: release-major release-minor release-patch
