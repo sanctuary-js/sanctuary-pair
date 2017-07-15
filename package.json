@@ -26,5 +26,11 @@
     "sanctuary-style": "0.5.x",
     "transcribe": "1.0.x",
     "xyz": "2.1.x"
-  }
+  },
+  "files": [
+    "/LICENSE",
+    "/README.md",
+    "/index.js",
+    "/package.json"
+  ]
 }
