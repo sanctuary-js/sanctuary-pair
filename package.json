@@ -19,7 +19,7 @@
     "fantasy-land": "3.3.0",
     "istanbul": "0.4.x",
     "mocha": "3.x.x",
-    "remark-cli": "3.x.x",
+    "remark-cli": "4.x.x",
     "remark-lint-no-undefined-references": "1.x.x",
     "remark-lint-no-unused-definitions": "1.x.x",
     "remember-bower": "0.1.x",
