@@ -3,6 +3,7 @@
 var assert = require('assert');
 
 var Z = require('sanctuary-type-classes');
+var type = require('sanctuary-type-identifiers');
 
 var P = require('..');
 var Pair = P.Pair;
@@ -16,6 +17,10 @@ function eq(actual, expected) {
   assert.strictEqual(Z.toString(actual), Z.toString(expected));
   assert.strictEqual(Z.equals(actual, expected), true);
 }
+
+test('type', function() {
+  eq(type(Pair(0, 0)), 'sanctuary-pair/Pair@1');
+});
 
 test('equals', function() {
   eq(Z.equals(Pair([1, 2, 3], [3, 2, 1]), Pair([1, 2, 3], [3, 2, 1])), true);

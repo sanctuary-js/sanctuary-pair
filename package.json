@@ -24,6 +24,7 @@
     "remark-lint-no-unused-definitions": "1.x.x",
     "remember-bower": "0.1.x",
     "sanctuary-style": "0.5.x",
+    "sanctuary-type-identifiers": "2.0.1",
     "transcribe": "1.0.x",
     "xyz": "2.1.x"
   },

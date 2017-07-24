@@ -80,11 +80,13 @@
 
   //# Pair.@@type :: String
   //.
+  //. Pair [type identifier][].
+  //.
   //. ```javascript
   //. > Pair['@@type']
-  //. 'sanctuary-pair/Pair'
+  //. 'sanctuary-pair/Pair@1'
   //. ```
-  Pair['@@type'] = 'sanctuary-pair/Pair';
+  Pair['@@type'] = 'sanctuary-pair/Pair@1';
 
   //# Pair#fantasy-land/equals :: (Setoid a, Setoid b) => Pair a b ~> Pair a b -> Boolean
   //.
@@ -276,3 +278,4 @@
 //. [Semigroupoid]:     v:fantasyland/fantasy-land#semigroupoid
 //. [Setoid]:           v:fantasyland/fantasy-land#setoid
 //. [Traversable]:      v:fantasyland/fantasy-land#traversable
+//. [type identifier]:  v:sanctuary-js/sanctuary-type-identifiers
