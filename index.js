@@ -54,6 +54,8 @@
 
   //# Pair :: (a, b) -> Pair a b
   //.
+  //. TK.
+  //.
   //. ```javascript
   //. > Pair(1, 2)
   //. Pair(1, 2)
@@ -68,6 +70,8 @@
   // istanbul ignore next: browser support
   if (typeof Symbol === 'function' && typeof Symbol.iterator === 'symbol') {
     //# Pair#[Symbol.iterator] :: Pair a b ~> () -> Iterator a b
+    //.
+    //. TK.
     //.
     //. ```javascript
     //. > [...Pair(1, 2)]
@@ -90,6 +94,8 @@
 
   //# Pair#fantasy-land/equals :: (Setoid a, Setoid b) => Pair a b ~> Pair a b -> Boolean
   //.
+  //. TK.
+  //.
   //. ```javascript
   //. > Z.equals(Pair([1, 2, 3], [3, 2, 1]), Pair([1, 2, 3], [3, 2, 1]))
   //. true
@@ -102,6 +108,8 @@
   };
 
   //# Pair#fantasy-land/lte :: (Ord a, Ord b) => Pair a b ~> Pair a b -> Boolean
+  //.
+  //. TK.
   //.
   //. ```javascript
   //. > Z.lte(Pair(0, 1), Pair(0, 1))
@@ -119,6 +127,8 @@
 
   //# Pair#fantasy-land/compose :: Pair a b ~> Pair b c -> Pair a c
   //.
+  //. TK.
+  //.
   //. ```javascript
   //. > Z.compose(Pair('b', true), Pair(1, 'a'))
   //. Pair(1, true)
@@ -128,6 +138,8 @@
   };
 
   //# Pair#fantasy-land/concat :: (Semigroup a, Semigroup b) => Pair a b ~> Pair a b -> Pair a b
+  //.
+  //. TK.
   //.
   //. ```javascript
   //. > Z.concat(Pair([1, 2, 3], [6, 5, 4]), Pair([4, 5, 6], [3, 2, 1]))
@@ -139,6 +151,8 @@
 
   //# Pair#fantasy-land/map :: Pair a b ~> (b -> c) -> Pair a c
   //.
+  //. TK.
+  //.
   //. ```javascript
   //. > Z.map(Math.sqrt, Pair('hello', 64))
   //. Pair('hello', 8)
@@ -148,6 +162,8 @@
   };
 
   //# Pair#fantasy-land/bimap :: Pair a b ~> (a -> b) -> (c -> d) -> Pair b d
+  //.
+  //. TK.
   //.
   //. ```javascript
   //. > Z.bimap(s => s + ' there', Math.sqrt, Pair('hello', 64))
@@ -159,6 +175,8 @@
 
   //# Pair#fantasy-land/ap :: Semigroup a => Pair a b ~> Pair a (b -> c) -> Pair a c
   //.
+  //. TK.
+  //.
   //. ```javascript
   //. > Z.ap(Pair('hello', Math.sqrt), Pair(' there', 64))
   //. Pair('hello there', 8)
@@ -168,6 +186,8 @@
   };
 
   //# Pair#fantasy-land/chain :: Semigroup a => Pair a b ~> (b -> Pair a c) -> Pair a c
+  //.
+  //. TK.
   //.
   //. ```javascript
   //. > Z.chain(n => Pair([n], n + 1), Pair([1], 2))
@@ -180,6 +200,8 @@
 
   //# Pair#fantasy-land/reduce :: Pair a b ~> ((c, a) -> c, c) -> c
   //.
+  //. TK.
+  //.
   //. ```javascript
   //. > Z.reduce(Z.concat, [1, 2, 3], Pair('irrelevant', [4, 5, 6]))
   //. [1, 2, 3, 4, 5, 6]
@@ -189,6 +211,8 @@
   };
 
   //# Pair#fantasy-land/traverse :: Applicative f => Pair a b ~> (TypeRep f, b -> f c) -> f (Pair a c)
+  //.
+  //. TK.
   //.
   //. ```javascript
   //. > Z.traverse(Array, x => [x, x], Pair(0, 1))
@@ -203,6 +227,8 @@
 
   //# Pair#fantasy-land/extend :: Pair a b ~> (Pair a b -> c) -> Pair a c
   //.
+  //. TK.
+  //.
   //. ```javascript
   //. > Z.extend(pair => Z.extract(pair) + 1, Pair('forever', 99))
   //. Pair('forever', 100)
@@ -212,6 +238,8 @@
   };
 
   //# Pair#fantasy-land/extract :: Pair a b ~> () -> b
+  //.
+  //. TK.
   //.
   //. ```javascript
   //. > Z.extract(Pair('the answer is', 42))
@@ -223,6 +251,8 @@
 
   //# Pair#toString :: Pair a b ~> () -> String
   //.
+  //. TK.
+  //.
   //. ```javascript
   //. > Z.toString(Pair(1, 2))
   //. 'Pair(1, 2)'
@@ -233,15 +263,17 @@
 
   //# Pair.fst :: Pair a b -> a
   //.
+  //. TK.
+  //.
   //. ```javascript
   //. > Pair.fst(Pair('hello', 42))
   //. 'hello'
   //. ```
-  Pair.fst = function fst(p) {
-    return p.fst;
-  };
+  Pair.fst = function fst(p) { return p.fst; };
 
   //# Pair.snd :: Pair a b -> b
+  //.
+  //. TK.
   //.
   //. ```javascript
   //. > Pair.snd(Pair('the answer is', 42))
@@ -251,13 +283,13 @@
 
   //# Pair.swap :: Pair a b -> Pair b a
   //.
+  //. TK.
+  //.
   //. ```javascript
   //. > Pair.swap(Pair(1, 2))
   //. Pair(2, 1)
   //. ```
-  Pair.swap = function swap(p) {
-    return Pair(p.snd, p.fst);
-  };
+  Pair.swap = function(p) { return Pair(p.snd, p.fst); };
 
   return Pair;
 

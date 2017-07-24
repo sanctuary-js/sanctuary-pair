@@ -6,9 +6,7 @@ var Z = require('sanctuary-type-classes');
 var type = require('sanctuary-type-identifiers');
 
 var Pair = require('..');
-var fst = Pair.fst;
-var snd = Pair.snd;
-var swap = Pair.swap;
+
 
 //  eq :: (Any, Any) -> Undefined !
 function eq(actual, expected) {
@@ -84,16 +82,16 @@ test('toString', function() {
   eq(Z.toString(Pair([1, 2], 3)), 'Pair([1, 2], 3)');
 });
 
-test('fst', function() {
-  eq(fst(Pair('hello', 42)), 'hello');
+test('Pair.fst', function() {
+  eq(Pair.fst(Pair('hello', 42)), 'hello');
 });
 
-test('snd', function() {
-  eq(snd(Pair('hello', 42)), 42);
+test('Pair.snd', function() {
+  eq(Pair.snd(Pair('hello', 42)), 42);
 });
 
-test('swap', function() {
-  eq(swap(Pair(1, 2)), Pair(2, 1));
+test('Pair.swap', function() {
+  eq(Pair.swap(Pair(1, 2)), Pair(2, 1));
 });
 
 /* global Symbol */
