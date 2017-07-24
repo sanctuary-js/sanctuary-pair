@@ -231,37 +231,35 @@
     return 'Pair(' + Z.toString(this.fst) + ', ' + Z.toString(this.snd) + ')';
   };
 
-  //# fst :: Pair a b -> a
+  //# Pair.fst :: Pair a b -> a
   //.
   //. ```javascript
-  //. > fst(Pair('hello', 42))
+  //. > Pair.fst(Pair('hello', 42))
   //. 'hello'
   //. ```
-  function fst(p) {
+  Pair.fst = function fst(p) {
     return p.fst;
-  }
+  };
 
-  //# snd :: Pair a b -> b
+  //# Pair.snd :: Pair a b -> b
   //.
   //. ```javascript
-  //. > snd(Pair('the answer is', 42))
+  //. > Pair.snd(Pair('the answer is', 42))
   //. 42
   //. ```
-  var snd = Z.extract;
+  Pair.snd = Z.extract;
 
-  //# swap :: Pair a b -> Pair b a
+  //# Pair.swap :: Pair a b -> Pair b a
   //.
   //. ```javascript
-  //. > swap(Pair(1, 2))
+  //. > Pair.swap(Pair(1, 2))
   //. Pair(2, 1)
   //. ```
-  function swap(p) {
+  Pair.swap = function swap(p) {
     return Pair(p.snd, p.fst);
-  }
-
-  return {
-    Pair: Pair, fst: fst, snd: snd, swap: swap
   };
+
+  return Pair;
 
 }));
 
