@@ -15,6 +15,119 @@ function eq(actual, expected) {
   assert.strictEqual(Z.equals(actual, expected), true);
 }
 
+//  Useless :: Useless
+var Useless = {
+  constructor: {'@@type': 'sanctuary-pair/Useless'},
+  inspect: function() { return 'Useless'; },
+  toString: function() { return 'Useless'; }
+};
+
+test('Z.Setoid.test', function() {
+  eq(Z.Setoid.test(Pair(Useless, Useless)), false);
+  eq(Z.Setoid.test(Pair(Useless, 'world')), false);
+  eq(Z.Setoid.test(Pair('hello', Useless)), false);
+  eq(Z.Setoid.test(Pair('hello', 'world')), true);
+});
+
+test('Z.Ord.test', function() {
+  eq(Z.Ord.test(Pair(Useless, Useless)), false);
+  eq(Z.Ord.test(Pair(Useless, 'world')), false);
+  eq(Z.Ord.test(Pair('hello', Useless)), false);
+  eq(Z.Ord.test(Pair('hello', 'world')), true);
+});
+
+test('Z.Semigroupoid.test', function() {
+  eq(Z.Semigroupoid.test(Pair(Useless, Useless)), true);
+});
+
+test('Z.Category.test', function() {
+  eq(Z.Category.test(Pair(Useless, Useless)), false);
+});
+
+test('Z.Semigroup.test', function() {
+  eq(Z.Semigroup.test(Pair(Useless, Useless)), false);
+  eq(Z.Semigroup.test(Pair(Useless, 'world')), false);
+  eq(Z.Semigroup.test(Pair('hello', Useless)), false);
+  eq(Z.Semigroup.test(Pair('hello', 'world')), true);
+});
+
+test('Z.Monoid.test', function() {
+  eq(Z.Monoid.test(Pair(Useless, Useless)), false);
+});
+
+test('Z.Functor.test', function() {
+  eq(Z.Functor.test(Pair(Useless, Useless)), true);
+});
+
+test('Z.Bifunctor.test', function() {
+  eq(Z.Bifunctor.test(Pair(Useless, Useless)), true);
+});
+
+test('Z.Profunctor.test', function() {
+  eq(Z.Profunctor.test(Pair(Useless, Useless)), false);
+});
+
+test('Z.Apply.test', function() {
+  eq(Z.Apply.test(Pair(Useless, Useless)), false);
+  eq(Z.Apply.test(Pair(Useless, 'world')), false);
+  eq(Z.Apply.test(Pair('hello', Useless)), true);
+  eq(Z.Apply.test(Pair('hello', 'world')), true);
+});
+
+test('Z.Applicative.test', function() {
+  eq(Z.Applicative.test(Pair(Useless, Useless)), false);
+});
+
+test('Z.Chain.test', function() {
+  eq(Z.Chain.test(Pair(Useless, Useless)), false);
+  eq(Z.Chain.test(Pair(Useless, 'world')), false);
+  eq(Z.Chain.test(Pair('hello', Useless)), true);
+  eq(Z.Chain.test(Pair('hello', 'world')), true);
+});
+
+test('Z.ChainRec.test', function() {
+  eq(Z.ChainRec.test(Pair(Useless, Useless)), false);
+  eq(Z.ChainRec.test(Pair(Useless, 'world')), false);
+  eq(Z.ChainRec.test(Pair('hello', Useless)), false);
+  eq(Z.ChainRec.test(Pair('hello', 'world')), false);
+});
+
+test('Z.Monad.test', function() {
+  eq(Z.Monad.test(Pair(Useless, Useless)), false);
+});
+
+test('Z.Alt.test', function() {
+  eq(Z.Alt.test(Pair(Useless, Useless)), false);
+});
+
+test('Z.Plus.test', function() {
+  eq(Z.Plus.test(Pair(Useless, Useless)), false);
+});
+
+test('Z.Alternative.test', function() {
+  eq(Z.Alternative.test(Pair(Useless, Useless)), false);
+});
+
+test('Z.Foldable.test', function() {
+  eq(Z.Foldable.test(Pair(Useless, Useless)), true);
+});
+
+test('Z.Traversable.test', function() {
+  eq(Z.Traversable.test(Pair(Useless, Useless)), true);
+});
+
+test('Z.Extend.test', function() {
+  eq(Z.Extend.test(Pair(Useless, Useless)), true);
+});
+
+test('Z.Comonad.test', function() {
+  eq(Z.Comonad.test(Pair(Useless, Useless)), true);
+});
+
+test('Z.Contravariant.test', function() {
+  eq(Z.Contravariant.test(Pair(Useless, Useless)), false);
+});
+
 test('type', function() {
   eq(type(Pair(0, 0)), 'sanctuary-pair/Pair@1');
 });
