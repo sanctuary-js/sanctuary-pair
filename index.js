@@ -64,6 +64,25 @@
     if (!(this instanceof Pair)) return new Pair(fst, snd);
     this.fst = fst;
     this.snd = snd;
+
+    //  Add "fantasy-land/concat" method conditionally so that
+    //  Pair('abc', 'def') satisfies the requirements of Semigroup but
+    //  Pair(123, 456) does not.
+    if (Z.Semigroup.test(this.fst)) {
+      if (Z.Semigroup.test(this.snd)) {
+        this['fantasy-land/concat'] = Pair$prototype$concat;
+      }
+      this['fantasy-land/ap'] = Pair$prototype$ap;
+      this['fantasy-land/chain'] = Pair$prototype$chain;
+    }
+
+    if (Z.Setoid.test(this.fst) && Z.Setoid.test(this.snd)) {
+      this['fantasy-land/equals'] = Pair$prototype$equals;
+    }
+
+    if (Z.Ord.test(this.fst) && Z.Ord.test(this.snd)) {
+      this['fantasy-land/lte'] = Pair$prototype$lte;
+    }
   }
 
   /* global Symbol */
@@ -104,9 +123,9 @@
   //. > Z.equals(Pair([1, 2, 3], [3, 2, 1]), Pair([1, 2, 3], [1, 2, 3]))
   //. false
   //. ```
-  Pair.prototype['fantasy-land/equals'] = function equals(other) {
+  function Pair$prototype$equals(other) {
     return Z.equals(this.fst, other.fst) && Z.equals(this.snd, other.snd);
-  };
+  }
 
   //# Pair#fantasy-land/lte :: (Ord a, Ord b) => Pair a b ~> Pair a b -> Boolean
   //.
@@ -124,9 +143,9 @@
   //. > Z.lte(Pair(1, 1), Pair(0, 1))
   //. false
   //. ```
-  Pair.prototype['fantasy-land/lte'] = function lte(other) {
+  function Pair$prototype$lte(other) {
     return Z.lte(this.fst, other.fst) && Z.lte(this.snd, other.snd);
-  };
+  }
 
   //# Pair#fantasy-land/compose :: Pair a b ~> Pair b c -> Pair a c
   //.
@@ -152,9 +171,9 @@
   //. > Z.concat(Pair([1, 2, 3], [6, 5, 4]), Pair([4, 5, 6], [3, 2, 1]))
   //. Pair([1, 2, 3, 4, 5, 6], [6, 5, 4, 3, 2, 1])
   //. ```
-  Pair.prototype['fantasy-land/concat'] = function concat(other) {
+  function Pair$prototype$concat(other) {
     return Pair(Z.concat(this.fst, other.fst), Z.concat(this.snd, other.snd));
-  };
+  }
 
   //# Pair#fantasy-land/map :: Pair a b ~> (b -> c) -> Pair a c
   //.
@@ -201,9 +220,9 @@
   //. > Z.ap(Pair('hello', Math.sqrt), Pair(' there', 64))
   //. Pair('hello there', 8)
   //. ```
-  Pair.prototype['fantasy-land/ap'] = function ap(other) {
+  function Pair$prototype$ap(other) {
     return Pair(Z.concat(other.fst, this.fst), other.snd(this.snd));
-  };
+  }
 
   //# Pair#fantasy-land/chain :: Semigroup a => Pair a b ~> (b -> Pair a c) -> Pair a c
   //.
@@ -216,10 +235,10 @@
   //. > Z.chain(n => Pair([n], n + 1), Pair([1], 2))
   //. Pair([1, 2], 3)
   //. ```
-  Pair.prototype['fantasy-land/chain'] = function ap(f) {
+  function Pair$prototype$chain(f) {
     var result = f(this.snd);
     return Pair(Z.concat(this.fst, result.fst), result.snd);
-  };
+  }
 
   //# Pair#fantasy-land/reduce :: Pair a b ~> ((c, a) -> c, c) -> c
   //.
