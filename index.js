@@ -331,7 +331,7 @@
   //. > Pair.snd(Pair('the answer is', 42))
   //. 42
   //. ```
-  Pair.snd = Z.extract;
+  Pair.snd = function snd(p) { return p.snd; };
 
   //# Pair.swap :: Pair a b -> Pair b a
   //.
