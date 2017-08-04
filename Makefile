@@ -45,7 +45,6 @@ lint:
 	  --global module \
 	  --global require \
 	  --global self \
-	  --rule 'max-len: [off]' \
 	  -- index.js
 	$(ESLINT) \
 	  --env node \

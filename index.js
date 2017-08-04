@@ -242,8 +242,9 @@
 
   //# Pair#fantasy-land/reduce :: Pair a b ~> ((c, a) -> c, c) -> c
   //.
-  //. Takes a function and an initial value of any type, and returns the result
-  //. of applying the function to the initial value and the `fst` value of this.
+  //. Takes a function and an initial value of any type, and returns the
+  //. result of applying the function to the initial value and the `fst`
+  //. value of this.
   //.
   //. ```javascript
   //. > Z.reduce(Z.concat, [1, 2, 3], Pair('irrelevant', [4, 5, 6]))
