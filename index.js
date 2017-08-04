@@ -54,7 +54,7 @@
 
   //# Pair :: (a, b) -> Pair a b
   //.
-  //. TK.
+  //. Takes two values of any type and returns a Pair of the given values.
   //.
   //. ```javascript
   //. > Pair(1, 2)
@@ -71,7 +71,7 @@
   if (typeof Symbol === 'function' && typeof Symbol.iterator === 'symbol') {
     //# Pair#[Symbol.iterator] :: Pair a b ~> () -> Iterator a b
     //.
-    //. TK.
+    //. Returns an [Iterator][] providing the `fst` and `snd` values of this.
     //.
     //. ```javascript
     //. > [...Pair(1, 2)]
@@ -94,7 +94,8 @@
 
   //# Pair#fantasy-land/equals :: (Setoid a, Setoid b) => Pair a b ~> Pair a b -> Boolean
   //.
-  //. TK.
+  //. Takes a value `p` of the same type and returns `true` if `this` and `p`
+  //. are both Pairs, and the `fst` and `snd` values for both are equal.
   //.
   //. ```javascript
   //. > Z.equals(Pair([1, 2, 3], [3, 2, 1]), Pair([1, 2, 3], [3, 2, 1]))
@@ -109,7 +110,9 @@
 
   //# Pair#fantasy-land/lte :: (Ord a, Ord b) => Pair a b ~> Pair a b -> Boolean
   //.
-  //. TK.
+  //. Takes a value `p` of the same type and returns `true` if `this` and `p`
+  //. are both Pairs, and the `fst` and `snd` values for both are less
+  //. than or equal.
   //.
   //. ```javascript
   //. > Z.lte(Pair(0, 1), Pair(0, 1))
@@ -127,7 +130,9 @@
 
   //# Pair#fantasy-land/compose :: Pair a b ~> Pair b c -> Pair a c
   //.
-  //. TK.
+  //. Takes a value `p` of any type and returns a Pair whose `fst` value is the
+  //. same as the `fst` value of this, and whose `snd` value is the same as the
+  //. `snd` value of `p`.
   //.
   //. ```javascript
   //. > Z.compose(Pair('b', true), Pair(1, 'a'))
@@ -139,7 +144,9 @@
 
   //# Pair#fantasy-land/concat :: (Semigroup a, Semigroup b) => Pair a b ~> Pair a b -> Pair a b
   //.
-  //. TK.
+  //. Takes a value `p` of the same type and returns the result of
+  //. concatenating the `fst` and `snd` values of this and `p`, respectively.
+  //. `a` and `b` must both have a [Semigroup][].
   //.
   //. ```javascript
   //. > Z.concat(Pair([1, 2, 3], [6, 5, 4]), Pair([4, 5, 6], [3, 2, 1]))
@@ -151,7 +158,11 @@
 
   //# Pair#fantasy-land/map :: Pair a b ~> (b -> c) -> Pair a c
   //.
-  //. TK.
+  //. Takes a function and returns a Pair whose `fst` value is unchanged and
+  //. whose `snd` value is the result of applying the function to the `snd`
+  //. value of this.
+  //.
+  //. See also [`Pair#fantasy-land/bimap`][].
   //.
   //. ```javascript
   //. > Z.map(Math.sqrt, Pair('hello', 64))
@@ -163,7 +174,13 @@
 
   //# Pair#fantasy-land/bimap :: Pair a b ~> (a -> b) -> (c -> d) -> Pair b d
   //.
-  //. TK.
+  //. Takes two functions and returns a Pair whose `fst` value is the result
+  //. of applying the first function to the `fst` value of this and whose `snd`
+  //. value is the result of applying the second function to the `snd` value of
+  //. this.
+  //.
+  //. Similar to [`Pair#fantasy-land/map`][], but supports mapping over both
+  //. values.
   //.
   //. ```javascript
   //. > Z.bimap(s => s + ' there', Math.sqrt, Pair('hello', 64))
@@ -175,7 +192,10 @@
 
   //# Pair#fantasy-land/ap :: Semigroup a => Pair a b ~> Pair a (b -> c) -> Pair a c
   //.
-  //. TK.
+  //. Takes a Pair `p` and returns a Pair whose `fst` value is the result of
+  //. concatenating the `fst` values of `this` and `p` and whose `snd` value
+  //. is the result of applying `p`'s `snd` value to the `snd` value of this.
+  //. `a` must have a [Semigroup][].
   //.
   //. ```javascript
   //. > Z.ap(Pair('hello', Math.sqrt), Pair(' there', 64))
@@ -187,7 +207,10 @@
 
   //# Pair#fantasy-land/chain :: Semigroup a => Pair a b ~> (b -> Pair a c) -> Pair a c
   //.
-  //. TK.
+  //. Takes a function that returns a Pair `p`, and returns a Pair whose `fst`
+  //. value is the result of concatenating the `fst` value of `p` with the
+  //. `fst` value of `this` and whose `snd` value is the same as the `snd`
+  //. value of `p`. `a` must have a [Semigroup][].
   //.
   //. ```javascript
   //. > Z.chain(n => Pair([n], n + 1), Pair([1], 2))
@@ -200,7 +223,8 @@
 
   //# Pair#fantasy-land/reduce :: Pair a b ~> ((c, a) -> c, c) -> c
   //.
-  //. TK.
+  //. Takes a function and an initial value of any type, and returns the result
+  //. of applying the function to the initial value and the `fst` value of this.
   //.
   //. ```javascript
   //. > Z.reduce(Z.concat, [1, 2, 3], Pair('irrelevant', [4, 5, 6]))
@@ -212,7 +236,10 @@
 
   //# Pair#fantasy-land/traverse :: Applicative f => Pair a b ~> (TypeRep f, b -> f c) -> f (Pair a c)
   //.
-  //. TK.
+  //. Takes a type representative of some [Applicative][] and a function which
+  //. returns a value of that Applicative, and returns the result of mapping
+  //. [`Pair`](#Pair) (partially applied with the `fst` value of this) over the
+  //. result of applying the first function to the `snd` value of this.
   //.
   //. ```javascript
   //. > Z.traverse(Array, x => [x, x], Pair(0, 1))
@@ -227,7 +254,9 @@
 
   //# Pair#fantasy-land/extend :: Pair a b ~> (Pair a b -> c) -> Pair a c
   //.
-  //. TK.
+  //. Takes a function and returns a Pair whose `fst` value is the same as the
+  //. `fst` value of this and whose `snd` value is the result of applying the
+  //. function to `this`.
   //.
   //. ```javascript
   //. > Z.extend(pair => Z.extract(pair) + 1, Pair('forever', 99))
@@ -239,7 +268,9 @@
 
   //# Pair#fantasy-land/extract :: Pair a b ~> () -> b
   //.
-  //. TK.
+  //. Returns the `snd` value of this.
+  //.
+  //. See also [`Pair.snd`][].
   //.
   //. ```javascript
   //. > Z.extract(Pair('the answer is', 42))
@@ -251,7 +282,7 @@
 
   //# Pair#toString :: Pair a b ~> () -> String
   //.
-  //. TK.
+  //. Returns the string representation of the Pair.
   //.
   //. ```javascript
   //. > Z.toString(Pair(1, 2))
@@ -263,7 +294,7 @@
 
   //# Pair.fst :: Pair a b -> a
   //.
-  //. TK.
+  //. Returns the `fst` value of this.
   //.
   //. ```javascript
   //. > Pair.fst(Pair('hello', 42))
@@ -273,7 +304,9 @@
 
   //# Pair.snd :: Pair a b -> b
   //.
-  //. TK.
+  //. Returns the `snd` value of this.
+  //.
+  //. See also [`Pair#fantasy-land/extract`][].
   //.
   //. ```javascript
   //. > Pair.snd(Pair('the answer is', 42))
@@ -283,7 +316,8 @@
 
   //# Pair.swap :: Pair a b -> Pair b a
   //.
-  //. TK.
+  //. Returns a Pair whose `fst` value is the same as the `snd` value of this
+  //. and whose `snd` value is the same as the `fst` value of this.
   //.
   //. ```javascript
   //. > Pair.swap(Pair(1, 2))
@@ -295,6 +329,7 @@
 
 }));
 
+//. [Applicative]:      v:fantasyland/fantasy-land#applicative
 //. [Apply]:            v:fantasyland/fantasy-land#apply
 //. [Bifunctor]:        v:fantasyland/fantasy-land#bifunctor
 //. [Chain]:            v:fantasyland/fantasy-land#chain
@@ -303,9 +338,15 @@
 //. [Fantasy Land]:     v:fantasyland/fantasy-land
 //. [Foldable]:         v:fantasyland/fantasy-land#foldable
 //. [Functor]:          v:fantasyland/fantasy-land#functor
+//. [Iterator]:         https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Iteration_protocols#The_iterator_protocol
 //. [Ord]:              v:fantasyland/fantasy-land#ord
 //. [Semigroup]:        v:fantasyland/fantasy-land#semigroup
 //. [Semigroupoid]:     v:fantasyland/fantasy-land#semigroupoid
 //. [Setoid]:           v:fantasyland/fantasy-land#setoid
 //. [Traversable]:      v:fantasyland/fantasy-land#traversable
 //. [type identifier]:  v:sanctuary-js/sanctuary-type-identifiers
+//.
+//. [`Pair#fantasy-land/bimap`]:   #Pair.prototype.fantasy-land/bimap
+//. [`Pair#fantasy-land/extract`]: #Pair.prototype.fantasy-land/extract
+//. [`Pair#fantasy-land/map`]:     #Pair.prototype.fantasy-land/map
+//. [`Pair.snd`]:                  #Pair.snd
