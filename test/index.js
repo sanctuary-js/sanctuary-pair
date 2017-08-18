@@ -1,18 +1,30 @@
 'use strict';
 
 var assert = require('assert');
-
+var laws = require('fantasy-laws');
+var Identity = require('sanctuary-identity');
+var IdentityArb = require('./internal/IdentityArb');
+var jsc = require('jsverify');
 var Z = require('sanctuary-type-classes');
 var type = require('sanctuary-type-identifiers');
 
 var Pair = require('..');
-
 
 //  eq :: (Any, Any) -> Undefined !
 function eq(actual, expected) {
   assert.strictEqual(arguments.length, eq.length);
   assert.strictEqual(Z.toString(actual), Z.toString(expected));
   assert.strictEqual(Z.equals(actual, expected), true);
+}
+
+//  PairArb :: Arbitrary a -> Arbitrary b -> Arbitrary (Pair a b)
+//  e.g. PairArb(jsc.bool, jsc.bool)
+function PairArb(lArb, rArb) {
+  return jsc.pair(lArb, rArb).smap(
+    function(p) { return Pair(p[0], p[1]); },
+    function(p) { return [p.fst, p.snd]; },
+    Z.toString
+  );
 }
 
 //  Useless :: Useless
@@ -208,6 +220,119 @@ test('Pair.snd', function() {
 test('Pair.swap', function() {
   eq(Pair.swap(Pair(1, 2)), Pair(2, 1));
 });
+
+test('laws.Apply.composition',
+     laws.Apply(Z.equals).composition(
+       PairArb(jsc.string, jsc.constant(Math.sqrt)),
+       PairArb(jsc.string, jsc.constant(Math.abs)),
+       PairArb(jsc.string, jsc.number)));
+
+test('laws.Setoid.reflexivity',
+     laws.Setoid.reflexivity(PairArb(jsc.string, jsc.bool)));
+
+test('laws.Setoid.symmetry',
+     laws.Setoid.symmetry(
+       PairArb(jsc.bool, jsc.bool),
+       PairArb(jsc.bool, jsc.bool)));
+
+test('laws.Setoid.transitivity',
+     laws.Setoid.transitivity(
+       PairArb(jsc.bool, jsc.bool),
+       PairArb(jsc.bool, jsc.bool),
+       PairArb(jsc.bool, jsc.bool)));
+
+test('laws.Semigroupoid.associativity',
+     laws.Semigroupoid(Z.equals).associativity(
+       PairArb(jsc.string, jsc.string),
+       PairArb(jsc.string, jsc.string),
+       PairArb(jsc.string, jsc.string)));
+
+test('laws.Semigroup.associativity',
+     laws.Semigroup(Z.equals).associativity(
+       PairArb(jsc.string, jsc.string),
+       PairArb(jsc.string, jsc.string),
+       PairArb(jsc.string, jsc.string)));
+
+test('laws.Ord.totality',
+     laws.Ord.totality(
+       PairArb(jsc.number, jsc.number),
+       PairArb(jsc.number, jsc.number)));
+
+test('laws.Ord.antisymmetry',
+     laws.Ord.antisymmetry(
+       PairArb(jsc.number, jsc.number),
+       PairArb(jsc.number, jsc.number)));
+
+test('laws.Ord.transitivity',
+     laws.Ord.transitivity(
+       PairArb(jsc.number, jsc.number),
+       PairArb(jsc.number, jsc.number),
+       PairArb(jsc.number, jsc.number)));
+
+test('laws.Functor.identity',
+     laws.Functor(Z.equals).identity(PairArb(jsc.string, jsc.number)));
+
+test('laws.Functor.composition',
+     laws.Functor(Z.equals).composition(
+       PairArb(jsc.string, jsc.number),
+       jsc.constant(Math.sqrt),
+       jsc.constant(Math.abs)));
+
+test('laws.Bifunctor.identity',
+     laws.Functor(Z.equals).identity(PairArb(jsc.string, jsc.number)));
+
+test('laws.Bifunctor.composition',
+     laws.Functor(Z.equals).composition(
+       PairArb(jsc.string, jsc.number),
+       jsc.constant(Math.sqrt),
+       jsc.constant(function(s) { return s.length; }),
+       jsc.constant(Math.sqrt),
+       jsc.constant(Math.abs)));
+
+test('laws.Chain.associativity',
+     laws.Chain(Z.equals).associativity(
+       PairArb(jsc.array(jsc.string), jsc.string),
+       jsc.constant(function(n) { return Pair([n], n + 1); }),
+       jsc.constant(function(n) { return Pair([n], n + 2); })));
+
+test('laws.Foldable.associativity',
+     laws.Foldable(Z.equals).associativity(
+       jsc.constant(function(a, b) { return a + b; }),
+       jsc.number,
+       PairArb(jsc.bool, jsc.number)));
+
+test('laws.Traversable.naturality',
+     laws.Traversable(Z.equals).naturality(
+       jsc.constant(Identity),
+       jsc.constant(Array),
+       jsc.constant(function(a) { return [a.value]; }),
+       PairArb(jsc.string, IdentityArb(jsc.number))));
+
+test('laws.Traversable.identity',
+     laws.Traversable(Z.equals).identity(
+       jsc.constant(Identity),
+       PairArb(jsc.string, jsc.number)));
+
+test('laws.Traversable.composition',
+     laws.Traversable(Z.equals).composition(
+     jsc.constant(Identity),
+     jsc.constant(Pair),
+     PairArb(jsc.string, IdentityArb(PairArb(jsc.string, jsc.number)))));
+
+test('laws.Extend.associativity',
+     laws.Extend(Z.equals).associativity(
+       PairArb(jsc.string, jsc.integer),
+       jsc.constant(function(pair) { return pair.snd + 1; }),
+       jsc.constant(function(pair) { return pair.snd * pair.snd; })));
+
+test('laws.Comonad.leftIdentity',
+     laws.Comonad(Z.equals).leftIdentity(
+       PairArb(jsc.string, jsc.integer)));
+
+test('laws.Comonad.rightIdentity',
+     laws.Comonad(Z.equals).rightIdentity(
+       PairArb(jsc.string, jsc.integer),
+       jsc.constant(function(pair) { return pair.snd + 1; })));
 
 /* global Symbol */
 if (typeof Symbol === 'function' && typeof Symbol.iterator === 'symbol') {

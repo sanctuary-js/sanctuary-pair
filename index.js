@@ -33,7 +33,7 @@
 //.   - [Foldable][]
 //.   - [Traversable][]
 //.   - [Extend][]
-//.   - [Extract][]
+//.   - [Comonad][]
 
 (function(f) {
 
@@ -354,8 +354,8 @@
 //. [Apply]:            v:fantasyland/fantasy-land#apply
 //. [Bifunctor]:        v:fantasyland/fantasy-land#bifunctor
 //. [Chain]:            v:fantasyland/fantasy-land#chain
+//. [Comonad]:          v:fantasyland/fantasy-land#comonad
 //. [Extend]:           v:fantasyland/fantasy-land#extend
-//. [Extract]:          v:fantasyland/fantasy-land#extract
 //. [Fantasy Land]:     v:fantasyland/fantasy-land
 //. [Foldable]:         v:fantasyland/fantasy-land#foldable
 //. [Functor]:          v:fantasyland/fantasy-land#functor
