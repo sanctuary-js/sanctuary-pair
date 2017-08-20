@@ -14,11 +14,10 @@
     "sanctuary-type-classes": "6.0.x"
   },
   "devDependencies": {
-    "doctest": "0.12.x",
     "fantasy-land": "3.3.0",
     "istanbul": "0.4.x",
     "mocha": "3.x.x",
-    "sanctuary-scripts": "sanctuary-js/sanctuary-scripts#5d855ffb318f8ffd2748c7c7eedcb28c82396d16",
+    "sanctuary-scripts": "sanctuary-js/sanctuary-scripts#a550c08d979f5a8583e8b3ebd8f6c928777ba952",
     "sanctuary-type-identifiers": "2.0.1"
   },
   "files": [

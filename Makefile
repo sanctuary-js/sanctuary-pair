@@ -1,4 +1,3 @@
-DOCTEST = node_modules/.bin/doctest --module commonjs --prefix .
 ISTANBUL = node_modules/.bin/istanbul
 NPM = npm
 
@@ -16,11 +15,7 @@ README.md: index.js package.json
 
 .PHONY: doctest
 doctest:
-ifeq ($(shell node --version | cut -d . -f 1),v6)
-	$(DOCTEST) -- index.js
-else
-	@echo '[WARN] Doctests are only run in Node v6.x.x (current version is $(shell node --version))' >&2
-endif
+	node_modules/.bin/sanctuary-doctest index.js
 
 
 .PHONY: lint
