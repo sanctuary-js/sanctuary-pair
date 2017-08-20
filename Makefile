@@ -50,6 +50,6 @@ setup:
 
 .PHONY: test
 test:
-	$(ISTANBUL) cover node_modules/.bin/_mocha -- --ui tdd -- test/index.js
+	$(ISTANBUL) cover node_modules/.bin/_mocha -- -- test/index.js
 	$(ISTANBUL) check-coverage --branches 100
 	make doctest
