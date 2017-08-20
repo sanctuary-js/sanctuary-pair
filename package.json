@@ -15,18 +15,11 @@
   },
   "devDependencies": {
     "doctest": "0.12.x",
-    "eslint": "3.19.x",
     "fantasy-land": "3.3.0",
     "istanbul": "0.4.x",
     "mocha": "3.x.x",
-    "remark-cli": "4.x.x",
-    "remark-lint-no-undefined-references": "1.x.x",
-    "remark-lint-no-unused-definitions": "1.x.x",
-    "remember-bower": "0.1.x",
-    "sanctuary-style": "0.5.x",
-    "sanctuary-type-identifiers": "2.0.1",
-    "transcribe": "1.0.x",
-    "xyz": "2.1.x"
+    "sanctuary-scripts": "sanctuary-js/sanctuary-scripts#ae88d6c3c1e7d2bc2af3dc78abaa4ad523ba47f6",
+    "sanctuary-type-identifiers": "2.0.1"
   },
   "files": [
     "/LICENSE",
