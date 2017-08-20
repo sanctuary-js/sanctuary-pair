@@ -18,7 +18,7 @@
     "fantasy-land": "3.3.0",
     "istanbul": "0.4.x",
     "mocha": "3.x.x",
-    "sanctuary-scripts": "sanctuary-js/sanctuary-scripts#ae88d6c3c1e7d2bc2af3dc78abaa4ad523ba47f6",
+    "sanctuary-scripts": "sanctuary-js/sanctuary-scripts#5d855ffb318f8ffd2748c7c7eedcb28c82396d16",
     "sanctuary-type-identifiers": "2.0.1"
   },
   "files": [
