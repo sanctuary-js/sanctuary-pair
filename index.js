@@ -144,8 +144,8 @@
   //. false
   //. ```
   function Pair$prototype$lte(other) {
-    if (Z.equals(this.fst, other.fst)) return Z.lte(this.snd, other.snd);
-    return Z.lte(this.fst, other.fst);
+    return Z.equals(this.fst, other.fst) ? Z.lte(this.snd, other.snd)
+                                         : Z.lte(this.fst, other.fst);
   }
 
   //# Pair#fantasy-land/compose :: Pair a b ~> Pair b c -> Pair a c
