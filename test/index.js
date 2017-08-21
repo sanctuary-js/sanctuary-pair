@@ -140,6 +140,8 @@ test('equals', function() {
 
 test('lte', function() {
   eq(Z.lte(Pair(0, 1), Pair(0, 1)), true);
+  eq(Z.lte(Pair(0, 1), Pair(1, 0)), true);
+  eq(Z.lte(Pair(1, 0), Pair(0, 1)), false);
   eq(Z.lte(Pair(0, 1), Pair(1, 1)), true);
   eq(Z.lte(Pair(1, 1), Pair(0, 1)), false);
 });
