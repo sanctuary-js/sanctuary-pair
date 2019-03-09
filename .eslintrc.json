@@ -4,12 +4,16 @@
   "overrides": [
     {
       "files": ["*.md"],
-      "globals": {"$": false, "Pair": false, "S": false, "Z": false, "show": false, "type": false}
+      "globals": {"$": false, "Pair": false, "S": false, "Z": false, "show": false, "type": false},
+      "rules": {
+        "array-element-newline": ["off"]
+      }
     },
     {
       "files": ["index.js"],
       "globals": {"Symbol": false},
       "rules": {
+        "multiline-comment-style": ["off"],
         "no-unused-vars": ["error", {"vars": "all", "varsIgnorePattern": "^S$", "args": "none"}]
       }
     }
