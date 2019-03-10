@@ -95,7 +95,7 @@
   //. .             (Z[k].test (Pair (Useless) (Useless)) ? '\u2705   ' :
   //. .              Z[k].test (Pair (['foo']) (['bar'])) ? '\u2705 * ' :
   //. .              /* otherwise */                        '\u274C   '))
-  //. .       (S.keys (Z.filter ($.test ([]) ($.TypeClass), Z)))
+  //. .       (S.keys (S.unchecked.filter (S.is ($.TypeClass)) (Z)))
   //. [ 'Setoid          ✅ * ',  // if ‘a’ and ‘b’ satisfy Setoid
   //. . 'Ord             ✅ * ',  // if ‘a’ and ‘b’ satisfy Ord
   //. . 'Semigroupoid    ✅   ',
