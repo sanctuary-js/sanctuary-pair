@@ -46,11 +46,16 @@
     var $ = __doctest.require ('sanctuary-def');
     var type = __doctest.require ('sanctuary-type-identifiers');
     /* eslint-enable no-unused-vars */
+    S.bimap = S.unchecked.bimap;
+    S.compose = S.unchecked.compose;
   }
+
+  var pairTypeIdent = 'sanctuary-pair/Pair@1';
 
   var prototype = {
     /* eslint-disable key-spacing */
     'constructor':            Pair,
+    '@@type':                 pairTypeIdent,
     '@@show':                 Pair$prototype$show,
     'fantasy-land/compose':   Pair$prototype$compose,
     'fantasy-land/map':       Pair$prototype$map,
@@ -82,11 +87,14 @@
   //. ```javascript
   //. > const Useless = require ('sanctuary-useless')
   //.
+  //. > const isTypeClass = x =>
+  //. .   type (x) === 'sanctuary-type-classes/TypeClass@1'
+  //.
   //. > S.map (k => k + ' '.repeat (16 - k.length) +
   //. .             (Z[k].test (Pair (Useless) (Useless)) ? '\u2705   ' :
   //. .              Z[k].test (Pair (['foo']) (['bar'])) ? '\u2705 * ' :
   //. .              /* otherwise */                        '\u274C   '))
-  //. .       (S.keys (S.unchecked.filter (S.is ($.TypeClass)) (Z)))
+  //. .       (S.keys (S.unchecked.filter (isTypeClass) (Z)))
   //. [ 'Setoid          ✅ * ',  // if ‘a’ and ‘b’ satisfy Setoid
   //. . 'Ord             ✅ * ',  // if ‘a’ and ‘b’ satisfy Ord
   //. . 'Semigroupoid    ✅   ',
@@ -173,19 +181,6 @@
   //. Pair ([1, 2, 3]) ('abc')
   //. ```
   Pair.swap = function(p) { return Pair (p.snd) (p.fst); };
-
-  //# Pair.@@type :: String
-  //.
-  //. Pair [type identifier][].
-  //.
-  //. ```javascript
-  //. > type (Pair ('abc') ([1, 2, 3]))
-  //. 'sanctuary-pair/Pair@1'
-  //.
-  //. > type.parse (type (Pair ('abc') ([1, 2, 3])))
-  //. {namespace: 'sanctuary-pair', name: 'Pair', version: 1}
-  //. ```
-  Pair['@@type'] = 'sanctuary-pair/Pair@1';
 
   //# Pair#@@show :: (Showable a, Showable b) => Pair a b ~> () -> String
   //.
@@ -373,5 +368,4 @@
 //. [`Z.equals`]:               v:sanctuary-js/sanctuary-type-classes#equals
 //. [`Z.lte`]:                  v:sanctuary-js/sanctuary-type-classes#lte
 //. [iff]:                      https://en.wikipedia.org/wiki/If_and_only_if
-//. [type identifier]:          v:sanctuary-js/sanctuary-type-identifiers
 //. [type representative]:      v:fantasyland/fantasy-land#type-representatives
