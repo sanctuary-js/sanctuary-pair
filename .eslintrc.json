@@ -4,7 +4,7 @@
   "overrides": [
     {
       "files": ["*.md"],
-      "globals": {"$": false, "Pair": false, "S": false, "Z": false, "show": false, "type": false},
+      "globals": {"$": false, "Pair": false, "S": false, "Z": false, "show": false},
       "rules": {
         "array-element-newline": ["off"]
       }

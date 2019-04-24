@@ -44,13 +44,15 @@
     /* eslint-disable no-unused-vars */
     var S = __doctest.require ('sanctuary');
     var $ = __doctest.require ('sanctuary-def');
-    var type = __doctest.require ('sanctuary-type-identifiers');
     /* eslint-enable no-unused-vars */
   }
+
+  var pairTypeIdent = 'sanctuary-pair/Pair@1';
 
   var prototype = {
     /* eslint-disable key-spacing */
     'constructor':            Pair,
+    '@@type':                 pairTypeIdent,
     '@@show':                 Pair$prototype$show,
     'fantasy-land/compose':   Pair$prototype$compose,
     'fantasy-land/map':       Pair$prototype$map,
@@ -173,19 +175,6 @@
   //. Pair ([1, 2, 3]) ('abc')
   //. ```
   Pair.swap = function(p) { return Pair (p.snd) (p.fst); };
-
-  //# Pair.@@type :: String
-  //.
-  //. Pair [type identifier][].
-  //.
-  //. ```javascript
-  //. > type (Pair ('abc') ([1, 2, 3]))
-  //. 'sanctuary-pair/Pair@1'
-  //.
-  //. > type.parse (type (Pair ('abc') ([1, 2, 3])))
-  //. {namespace: 'sanctuary-pair', name: 'Pair', version: 1}
-  //. ```
-  Pair['@@type'] = 'sanctuary-pair/Pair@1';
 
   //# Pair#@@show :: (Showable a, Showable b) => Pair a b ~> () -> String
   //.
