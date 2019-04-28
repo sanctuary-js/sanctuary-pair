@@ -41,20 +41,11 @@
 
   /* istanbul ignore if */
   if (typeof __doctest !== 'undefined') {
+    /* eslint-disable no-unused-vars */
+    var S = __doctest.require ('sanctuary');
     var $ = __doctest.require ('sanctuary-def');
     var type = __doctest.require ('sanctuary-type-identifiers');
-    var S = (function() {
-      var S = __doctest.require ('sanctuary');
-      var PairType = $.BinaryType
-        ('sanctuary-pair/Pair')
-        ('')
-        (function(x) { return type (x) === Pair['@@type']; })
-        (function(p) { return [p.fst]; })
-        (function(p) { return [p.snd]; });
-      var env = Z.concat (S.env,
-                          [$.TypeClass, PairType ($.Unknown) ($.Unknown)]);
-      return S.create ({checkTypes: true, env: env});
-    } ());
+    /* eslint-enable no-unused-vars */
   }
 
   var prototype = {
