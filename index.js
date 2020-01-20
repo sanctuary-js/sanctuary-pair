@@ -44,7 +44,6 @@
     /* eslint-disable no-unused-vars */
     var S = __doctest.require ('sanctuary');
     var $ = __doctest.require ('sanctuary-def');
-    var type = __doctest.require ('sanctuary-type-identifiers');
     /* eslint-enable no-unused-vars */
     S.bimap = S.unchecked.bimap;
     S.compose = S.unchecked.compose;
@@ -87,14 +86,11 @@
   //. ```javascript
   //. > const Useless = require ('sanctuary-useless')
   //.
-  //. > const isTypeClass = x =>
-  //. .   type (x) === 'sanctuary-type-classes/TypeClass@1'
-  //.
   //. > S.map (k => k + ' '.repeat (16 - k.length) +
   //. .             (Z[k].test (Pair (Useless) (Useless)) ? '\u2705   ' :
   //. .              Z[k].test (Pair (['foo']) (['bar'])) ? '\u2705 * ' :
   //. .              /* otherwise */                        '\u274C   '))
-  //. .       (S.keys (S.unchecked.filter (isTypeClass) (Z)))
+  //. .       (S.keys (S.unchecked.filter (S.is ($.TypeClass)) (Z)))
   //. [ 'Setoid          ✅ * ',  // if ‘a’ and ‘b’ satisfy Setoid
   //. . 'Ord             ✅ * ',  // if ‘a’ and ‘b’ satisfy Ord
   //. . 'Semigroupoid    ✅   ',
