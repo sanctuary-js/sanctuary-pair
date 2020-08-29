@@ -66,12 +66,10 @@
     /* eslint-enable key-spacing */
   };
 
-  var custom = util.inspect.custom;
+  var custom = util.inspect.custom;  // added in Node.js v6.6.0
   /* istanbul ignore else */
   if (typeof custom === 'symbol') {
     prototype[custom] = Pair$prototype$show;
-  } else {
-    prototype.inspect = Pair$prototype$show;
   }
 
   /* istanbul ignore else */
