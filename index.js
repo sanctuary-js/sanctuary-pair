@@ -181,7 +181,7 @@
   //. `'Pair (' + show (x) + ') (' + show (y) + ')'`.
   //.
   //. ```javascript
-  //. > show (Pair ('abc') ([1, 2, 3]))
+  //. > S.show (Pair ('abc') ([1, 2, 3]))
   //. 'Pair ("abc") ([1, 2, 3])'
   //. ```
   function Pair$prototype$show() {
@@ -295,7 +295,7 @@
   //. `Pair (concat (x) (fst (f (y)))) (snd (f (y)))`.
   //.
   //. ```javascript
-  //. > S.chain (n => Pair (show (n)) (Math.sqrt (n))) (Pair ('abc') (256))
+  //. > S.chain (n => Pair (S.show (n)) (Math.sqrt (n))) (Pair ('abc') (256))
   //. Pair ('abc256') (16)
   //. ```
   function Pair$prototype$chain(f) {
