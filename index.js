@@ -14,11 +14,11 @@
 //. Pair is the canonical product type: a value of type `Pair a b` always
 //. contains exactly two values: one of type `a`; one of type `b`.
 
-(function(f) {
+(f => {
 
   'use strict';
 
-  var util = {inspect: {}};
+  const util = {inspect: {}};
 
   /* istanbul ignore else */
   if (typeof module === 'object' && typeof module.exports === 'object') {
@@ -26,32 +26,29 @@
                         require ('sanctuary-show'),
                         require ('sanctuary-type-classes'));
   } else if (typeof define === 'function' && define.amd != null) {
-    define (['sanctuary-show', 'sanctuary-type-classes'], function(show, Z) {
-      return f (util, show, Z);
-    });
+    define (['sanctuary-show', 'sanctuary-type-classes'],
+            (show, Z) => f (util, show, Z));
   } else {
     self.sanctuaryPair = f (util,
                             self.sanctuaryShow,
                             self.sanctuaryTypeClasses);
   }
 
-} (function(util, show, Z) {
+}) ((util, show, Z) => {
 
   'use strict';
 
   /* istanbul ignore if */
   if (typeof __doctest !== 'undefined') {
-    /* eslint-disable no-unused-vars */
+    /* eslint-disable no-unused-vars, no-var */
     var S = __doctest.require ('sanctuary');
     var $ = __doctest.require ('sanctuary-def');
-    /* eslint-enable no-unused-vars */
-    S.bimap = S.unchecked.bimap;
-    S.compose = S.unchecked.compose;
+    /* eslint-enable no-unused-vars, no-var */
   }
 
-  var pairTypeIdent = 'sanctuary-pair/Pair@1';
+  const pairTypeIdent = 'sanctuary-pair/Pair@1';
 
-  var prototype = {
+  const prototype = {
     /* eslint-disable key-spacing */
     'constructor':            Pair,
     '@@type':                 pairTypeIdent,
@@ -62,14 +59,16 @@
     'fantasy-land/reduce':    Pair$prototype$reduce,
     'fantasy-land/traverse':  Pair$prototype$traverse,
     'fantasy-land/extend':    Pair$prototype$extend,
-    'fantasy-land/extract':   Pair$prototype$extract
+    'fantasy-land/extract':   Pair$prototype$extract,
     /* eslint-enable key-spacing */
   };
 
-  var custom = util.inspect.custom;  // added in Node.js v6.6.0
-  /* istanbul ignore else */
-  if (typeof custom === 'symbol') {
-    prototype[custom] = Pair$prototype$show;
+  {
+    const {custom} = util.inspect;  // added in Node.js v6.6.0
+    /* istanbul ignore else */
+    if (typeof custom === 'symbol') {
+      prototype[custom] = Pair$prototype$show;
+    }
   }
 
   /* istanbul ignore else */
@@ -125,8 +124,8 @@
   //. Pair (1) (2)
   //. ```
   function Pair(fst) {
-    return function(snd) {
-      var pair = Object.create (prototype);
+    return snd => {
+      const pair = Object.create (prototype);
       if (Z.Setoid.test (fst) && Z.Setoid.test (snd)) {
         pair['fantasy-land/equals'] = Pair$prototype$equals;
         if (Z.Ord.test (fst) && Z.Ord.test (snd)) {
@@ -154,7 +153,7 @@
   //. > Pair.fst (Pair ('abc') ([1, 2, 3]))
   //. 'abc'
   //. ```
-  Pair.fst = function(p) { return p.fst; };
+  Pair.fst = p => p.fst;
 
   //# Pair.snd :: Pair a b -> b
   //.
@@ -164,7 +163,7 @@
   //. > Pair.snd (Pair ('abc') ([1, 2, 3]))
   //. [1, 2, 3]
   //. ```
-  Pair.snd = function(p) { return p.snd; };
+  Pair.snd = p => p.snd;
 
   //# Pair.swap :: Pair a b -> Pair b a
   //.
@@ -174,7 +173,7 @@
   //. > Pair.swap (Pair ('abc') ([1, 2, 3]))
   //. Pair ([1, 2, 3]) ('abc')
   //. ```
-  Pair.swap = function(p) { return Pair (p.snd) (p.fst); };
+  Pair.swap = p => Pair (p.snd) (p.fst);
 
   //# Pair#@@show :: (Showable a, Showable b) => Pair a b ~> () -> String
   //.
@@ -300,7 +299,7 @@
   //. Pair ('abc256') (16)
   //. ```
   function Pair$prototype$chain(f) {
-    var other = f (this.snd);
+    const other = f (this.snd);
     return Pair (Z.concat (this.fst, other.fst)) (other.snd);
   }
 
@@ -356,7 +355,7 @@
 
   return Pair;
 
-}));
+});
 
 //. [Fantasy Land]:             v:fantasyland/fantasy-land
 //. [`Z.equals`]:               v:sanctuary-js/sanctuary-type-classes#equals
