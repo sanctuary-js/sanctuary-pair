@@ -69,6 +69,12 @@
     if (typeof custom === 'symbol') {
       prototype[custom] = Pair$prototype$show;
     }
+    /* istanbul ignore if */
+    if (typeof Deno !== 'undefined') {
+      if (Deno != null && typeof Deno.customInspect === 'symbol') {
+        prototype[Deno.customInspect] = Pair$prototype$show;
+      }
+    }
   }
 
   /* istanbul ignore else */
