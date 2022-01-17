@@ -70,6 +70,12 @@ suite ('Pair', () => {
     eq (iterator.next ()) ({value: undefined, done: true});
   });
 
+  test ('Pair.pair', () => {
+    eq (Pair.pair (a => b => 'Pair (' + show (a) + ') (' + show (b) + ')')
+                  (Pair ('abc') ([1, 2, 3])))
+       ('Pair ("abc") ([1, 2, 3])');
+  });
+
   test ('Pair.fst', () => {
     eq (Pair.fst (Pair ('foo') (42))) ('foo');
   });

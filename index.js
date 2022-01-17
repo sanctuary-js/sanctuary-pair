@@ -150,6 +150,18 @@
     };
   }
 
+  //# Pair.pair :: (a -> b -> c) -> Pair a b -> c
+  //.
+  //. Case-folding function.
+  //.
+  //. `pair (f) (Pair (x) (y))` is equivalent to `f (x) (y)`.
+  //.
+  //. ```javascript
+  //. > Pair.pair (a => b => a + b) (Pair ('foo') ('bar'))
+  //. 'foobar'
+  //. ```
+  Pair.pair = f => p => f (p.fst) (p.snd);
+
   //# Pair.fst :: Pair a b -> a
   //.
   //. `fst (Pair (x) (y))` is equivalent to `x`.
