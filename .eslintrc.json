@@ -1,6 +1,9 @@
 {
   "root": true,
   "extends": ["./node_modules/sanctuary-style/eslint-es6.json"],
+  "rules": {
+    "comma-dangle": ["error", {"arrays": "always-multiline", "objects": "always-multiline", "imports": "always-multiline", "exports": "always-multiline", "functions": "never"}]
+  },
   "overrides": [
     {
       "files": ["*.md"],
@@ -15,6 +18,10 @@
       "rules": {
         "multiline-comment-style": ["off"]
       }
+    },
+    {
+      "files": ["test/**/*.js"],
+      "parserOptions": {"ecmaVersion": 2020, "sourceType": "module"}
     }
   ]
 }
