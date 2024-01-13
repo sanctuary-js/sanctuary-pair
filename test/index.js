@@ -1,4 +1,5 @@
 import {deepStrictEqual as eq} from 'node:assert';
+import {inspect} from 'node:util';
 
 import laws from 'fantasy-laws';
 import jsc from 'jsverify';
@@ -47,6 +48,11 @@ test ('@@type', () => {
 
 test ('@@show', () => {
   eq (show (Pair (['foo', 'bar', 'baz']) (-0)),
+      'Pair (["foo", "bar", "baz"]) (-0)');
+});
+
+test ('util.inspect', () => {
+  eq (inspect (Pair (['foo', 'bar', 'baz']) (-0)),
       'Pair (["foo", "bar", "baz"]) (-0)');
 });
 
