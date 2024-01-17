@@ -10,7 +10,7 @@ import Z from 'sanctuary-type-classes';
 import type from 'sanctuary-type-identifiers';
 import Useless from 'sanctuary-useless';
 
-import Pair from '../index.js';
+import {Pair, pair, fst, snd, swap} from '../index.js';
 
 
 //    IdentityArb :: Arbitrary a -> Arbitrary (Identity a)
@@ -64,22 +64,22 @@ test ('@@iterator', () => {
   eq (iterator.next (), {value: undefined, done: true});
 });
 
-test ('Pair.pair', () => {
-  eq (Pair.pair (a => b => 'Pair (' + show (a) + ') (' + show (b) + ')')
-                (Pair ('abc') ([1, 2, 3])),
+test ('pair', () => {
+  eq (pair (a => b => 'Pair (' + show (a) + ') (' + show (b) + ')')
+           (Pair ('abc') ([1, 2, 3])),
       'Pair ("abc") ([1, 2, 3])');
 });
 
-test ('Pair.fst', () => {
-  eq (Pair.fst (Pair ('foo') (42)), 'foo');
+test ('fst', () => {
+  eq (fst (Pair ('foo') (42)), 'foo');
 });
 
-test ('Pair.snd', () => {
-  eq (Pair.snd (Pair ('foo') (42)), 42);
+test ('snd', () => {
+  eq (snd (Pair ('foo') (42)), 42);
 });
 
-test ('Pair.swap', () => {
-  eq (Pair.swap (Pair ('foo') (42)), Pair (42) ('foo'));
+test ('swap', () => {
+  eq (swap (Pair ('foo') (42)), Pair (42) ('foo'));
 });
 
 test ('Setoid', () => {
